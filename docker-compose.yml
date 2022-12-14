@@ -1,0 +1,45 @@
+version: '3.3'
+
+services:
+  # app:
+  #   # build: ../.
+  #   image: attapatka/api-json:1.6
+  #   container_name: myapp-api
+  #   ports:
+  #     - 8080:8080
+  mariadb:
+    #platform: linux/x86_64 # for m1
+    image: mariadb:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin123
+      MYSQL_USER:  root 
+      MYSQL_PASSWORD: admin123
+      MARIADB_DATABASE: todoapp
+    ports:
+        - "3306:3306"
+    volumes:
+     - my-db:/var/lib/mysql
+
+  # db gui (phpmyadmin)
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "8082:80"
+    environment:
+      - PMA_HOST=mariadb
+      - PMA_PORT=3306 
+
+  # redis:
+  #   image: redis
+  #   container_name: redis
+  #   ports:
+  #     - 6379:6379 # ports default redis
+  #   volumes:
+  #     - ./data/redis:/data
+  #     - ./config/redis.conf:/redis.conf
+  #   command: redis-server /redis.conf # redis-server : start /redis.conf
+
+volumes:
+  my-db:
