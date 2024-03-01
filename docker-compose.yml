@@ -3,7 +3,7 @@ version: '3.3'
 services:
   # app:
   #   # build: ../.
-  #   image: attapatka/api-json:1.6
+  #   image: <repo>/api-json:1.6
   #   container_name: myapp-api
   #   ports:
   #     - 8080:8080
